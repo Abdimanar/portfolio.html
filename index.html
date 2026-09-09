@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Abdimanar Edin Guyo — Data Analyst & Accountant</title>
+<meta name="description" content="Portfolio of Abdimanar Edin Guyo, Data Analyst & Accountant based in Nairobi, Kenya." />
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: {
+            DEFAULT: '#0E1420',
+            50: '#f5f6f8',
+            100: '#e9ebef',
+            800: '#141b29',
+            900: '#0E1420',
+            950: '#080b12',
+          },
+          paper: '#F7F5F0',
+          indigo: {
+            DEFAULT: '#3B3FA8',
+            50: '#eef0fb',
+            600: '#3B3FA8',
+            700: '#2F3288',
+          },
+          emerald: {
+            DEFAULT: '#1F8A6E',
+            400: '#2CB48C',
+            500: '#1F8A6E',
+          },
+          slate2: '#6B7280',
+        },
+        fontFamily: {
+          serif: ['"Source Serif 4"', 'serif'],
+          sans: ['Inter', 'sans-serif'],
+          mono: ['"IBM Plex Mono"', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { background-color: #0E1420; }
+
+  ::selection { background: #2CB48C; color: #0E1420; }
+
+  .ledger-line {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 27px,
+      rgba(255,255,255,0.045) 28px
+    );
+  }
+
+  .rule {
+    border-color: rgba(255,255,255,0.09);
+  }
+
+  .rule-light {
+    border-color: rgba(14,20,32,0.1);
+  }
+
+  .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .card-tick {
+    position: relative;
+  }
+  .card-tick::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #2CB48C, #3B3FA8);
+    opacity: 0;
+    transform: scaleY(0.3);
+    transform-origin: top;
+    transition: opacity .35s ease, transform .35s ease;
+  }
+  .card-tick:hover::before {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .timeline-dot {
+    box-shadow: 0 0 0 4px #0E1420, 0 0 0 5px rgba(44,180,140,0.5);
+  }
+
+  #mobile-menu {
+    transition: max-height .35s ease, opacity .25s ease;
+  }
+
+  .skill-bar-fill {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1s cubic-bezier(.22,.9,.3,1);
+  }
+  .skill-bar-fill.is-visible { transform: scaleX(1); }
+
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -6px;
+    height: 1px;
+    background: #2CB48C;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s ease;
+  }
+  .nav-link:hover::after { transform: scaleX(1); }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #0E1420; }
+  ::-webkit-scrollbar-thumb { background: #23304a; border-radius: 6px; }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid #2CB48C;
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal, .skill-bar-fill, #mobile-menu { transition: none !important; }
+    .reveal { opacity: 1 !important; transform: none !important; }
+  }
+</style>
+</head>
+
+<body class="bg-ink text-white font-sans antialiased">
+
+<!-- ============ NAV ============ -->
+<header id="site-header" class="fixed top-0 inset-x-0 z-50 border-b border-white/0 transition-colors duration-300">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex items-center justify-between h-16">
+      <a href="#top" class="font-serif text-lg tracking-tight text-white">
+        Abdimanar <span class="text-emerald-400">Edin Guyo</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm text-white/70">
+        <a href="#about" class="nav-link hover:text-white transition-colors">About</a>
+        <a href="#skills" class="nav-link hover:text-white transition-colors">Skills</a>
+        <a href="#experience" class="nav-link hover:text-white transition-colors">Experience</a>
+        <a href="#projects" class="nav-link hover:text-white transition-colors">Projects</a>
+        <a href="#education" class="nav-link hover:text-white transition-colors">Education</a>
+        <a href="#contact" class="ml-2 px-4 py-2 rounded-sm bg-emerald-500 text-ink font-medium hover:bg-emerald-400 transition-colors">Contact</a>
+      </nav>
+
+      <button id="menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" class="md:hidden text-white p-2">
+        <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+        <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="md:hidden overflow-hidden max-h-0 opacity-0 bg-ink-950/98 border-b border-white/10">
+    <nav class="flex flex-col px-6 py-4 gap-4 text-white/80 text-sm">
+      <a href="#about" class="mobile-link">About</a>
+      <a href="#skills" class="mobile-link">Skills</a>
+      <a href="#experience" class="mobile-link">Experience</a>
+      <a href="#projects" class="mobile-link">Projects</a>
+      <a href="#education" class="mobile-link">Education</a>
+      <a href="#contact" class="mobile-link text-emerald-400">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="top" class="relative min-h-screen flex items-center pt-24 pb-16 ledger-line overflow-hidden">
+  <div class="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-indigo-600/20 blur-3xl"></div>
+  <div class="absolute bottom-0 -left-24 h-72 w-72 rounded-full bg-emerald-500/10 blur-3xl"></div>
+
+  <div class="max-w-6xl mx-auto px-6 w-full relative grid md:grid-cols-5 gap-12 items-center">
+
+    <div class="md:col-span-3">
+      <p class="num text-emerald-400 text-xs tracking-wide mb-6">Nairobi, Kenya · English / Kiswahili</p>
+
+      <h1 class="font-serif text-5xl sm:text-6xl leading-[1.05] text-white mb-6">
+        Turning ledgers and<br />datasets into decisions.
+      </h1>
+
+      <p class="text-white/60 text-lg leading-relaxed max-w-xl mb-10">
+        I'm Abdimanar Edin Guyo, a data analyst and accountant based in Nairobi.
+        I reconcile the books and I read the numbers behind them — using Power BI,
+        SQL, Python and Excel to turn financial and operational data into decisions
+        people can act on.
+      </p>
+
+      <div class="flex flex-wrap gap-4">
+        <a href="#projects" class="px-6 py-3 bg-emerald-500 text-ink font-medium rounded-sm hover:bg-emerald-400 transition-colors">
+          View my work
+        </a>
+        <a href="#contact" class="px-6 py-3 border border-white/20 text-white rounded-sm hover:border-white/50 hover:bg-white/5 transition-colors">
+          Get in touch
+        </a>
+      </div>
+    </div>
+
+    <div class="md:col-span-2">
+      <div class="border border-white/10 bg-white/[0.03] rounded-sm p-6 backdrop-blur-sm">
+        <p class="text-xs text-white/40 mb-5 pb-4 border-b rule">Snapshot</p>
+        <dl class="space-y-5">
+          <div class="flex items-baseline justify-between">
+            <dt class="text-white/60 text-sm">Current role</dt>
+            <dd class="text-white text-sm text-right">Accountant, Automan Intl.</dd>
+          </div>
+          <div class="flex items-baseline justify-between">
+            <dt class="text-white/60 text-sm">Core stack</dt>
+            <dd class="num text-emerald-400 text-sm text-right">SQL · Power BI · Python</dd>
+          </div>
+          <div class="flex items-baseline justify-between">
+            <dt class="text-white/60 text-sm">Certification</dt>
+            <dd class="text-white text-sm text-right">CPA (Kasneb), in progress</dd>
+            <dd class="text-white text-sm text-right">Data analysis from Generation Ghana</dd>
+          </div>
+          <div class="flex items-baseline justify-between">
+            <dt class="text-white/60 text-sm">Based in</dt>
+            <dd class="text-white text-sm text-right">Nairobi, Kenya</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="bg-paper text-ink py-24">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-12 gap-12">
+    <div class="md:col-span-4">
+      <p class="text-emerald-500 text-sm mb-2">About</p>
+      <h2 class="font-serif text-3xl md:text-4xl leading-tight">A profile built at the intersection of finance and data.</h2>
+    </div>
+    <div class="md:col-span-7 md:col-start-6">
+      <p class="text-ink/70 leading-relaxed text-lg mb-6">
+        I'm a results-driven professional combining financial accounting with data
+        analytics. My work spans financial recordkeeping and budgeting support on
+        one side, and transforming complex datasets into actionable business
+        insight on the other — using Power BI, SQL, Python and Excel.
+      </p>
+      <p class="text-ink/70 leading-relaxed text-lg mb-10">
+        Across every role, the throughline has been the same: take a messy set of
+        transactions, tickets, or figures, and leave behind something a decision-maker
+        can actually use — a clean ledger, a dashboard, or a report that streamlines
+        how a team operates.
+      </p>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t rule-light">
+        <div>
+          <p class="num text-3xl font-semibold text-indigo-600">3+</p>
+          <p class="text-ink/50 text-sm mt-1">Roles across finance & IT</p>
+        </div>
+        <div>
+          <p class="num text-3xl font-semibold text-indigo-600">2</p>
+          <p class="text-ink/50 text-sm mt-1">Analytics case studies</p>
+        </div>
+        <div>
+          <p class="num text-3xl font-semibold text-indigo-600">4</p>
+          <p class="text-ink/50 text-sm mt-1">Core analytics tools</p>
+        </div>
+        <div>
+          <p class="num text-3xl font-semibold text-indigo-600">2</p>
+          <p class="text-ink/50 text-sm mt-1">Languages spoken</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills" class="bg-ink py-24 border-t rule">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="mb-14 max-w-xl">
+      <p class="text-emerald-400 text-sm mb-2">Skills</p>
+      <h2 class="font-serif text-3xl md:text-4xl">What I bring to the table.</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-px bg-white/10">
+      <!-- Financial & Accounting -->
+      <div class="bg-ink p-8">
+        <h3 class="font-serif text-xl mb-6 text-white">Financial & Accounting</h3>
+        <ul class="space-y-5">
+          <li>
+            <div class="flex justify-between text-sm mb-2"><span class="text-white/70">Financial Reporting</span><span class="num text-white/40">90%</span></div>
+            <div class="h-[3px] w-full bg-white/10"><div class="skill-bar h-full bg-indigo-600 skill-bar-fill" style="width:90%"></div></div>
+          </li>
+          <li>
+            <div class="flex justify-between text-sm mb-2"><span class="text-white/70">Budgeting</span><span class="num text-white/40">85%</span></div>
+            <div class="h-[3px] w-full bg-white/10"><div class="skill-bar h-full bg-indigo-600 skill-bar-fill" style="width:85%"></div></div>
+          </li>
+          <li>
+            <div class="flex justify-between text-sm mb-2"><span class="text-white/70">CPA Foundation (Kasneb)</span><span class="num text-white/40">In progress</span></div>
+            <div class="h-[3px] w-full bg-white/10"><div class="skill-bar h-full bg-indigo-600 skill-bar-fill" style="width:60%"></div></div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Data & Analytics -->
+      <div class="bg-ink p-8">
+        <h3 class="font-serif text-xl mb-6 text-white">Data Analytics & Tools</h3>
+        <ul class="space-y-5">
+          <li>
+            <div class="flex justify-between text-sm mb-2"><span class="text-white/70">Power BI</span><span class="num text-white/40">88%</span></div>
+            <div class="h-[3px] w-full bg-white/10"><div class="skill-bar h-full bg-emerald-500 skill-bar-fill" style="width:88%"></div></div>
+          </li>
+          <li>
+            <div class="flex justify-between text-sm mb-2"><span class="text-white/70">MySQL Workbench</span><span class="num text-white/40">85%</span></div>
+            <div class="h-[3px] w-full bg-white/10"><div class="skill-bar h-full bg-emerald-500 skill-bar-fill" style="width:85%"></div></div>
+          </li>
+          <li>
+            <div class="flex justify-between text-sm mb-2"><span class="text-white/70">Python (Pandas, NumPy, Matplotlib)</span><span class="num text-white/40">80%</span></div>
+            <div class="h-[3px] w-full bg-white/10"><div class="skill-bar h-full bg-emerald-500 skill-bar-fill" style="width:80%"></div></div>
+          </li>
+          <li>
+            <div class="flex justify-between text-sm mb-2"><span class="text-white/70">Excel (Advanced)</span><span class="num text-white/40">92%</span></div>
+            <div class="h-[3px] w-full bg-white/10"><div class="skill-bar h-full bg-emerald-500 skill-bar-fill" style="width:92%"></div></div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- IT -->
+      <div class="bg-ink p-8">
+        <h3 class="font-serif text-xl mb-6 text-white">IT & Infrastructure</h3>
+        <ul class="space-y-5">
+          <li>
+            <div class="flex justify-between text-sm mb-2"><span class="text-white/70">Network Troubleshooting</span><span class="num text-white/40">82%</span></div>
+            <div class="h-[3px] w-full bg-white/10"><div class="skill-bar h-full bg-white/50 skill-bar-fill" style="width:82%"></div></div>
+          </li>
+          <li>
+            <div class="flex justify-between text-sm mb-2"><span class="text-white/70">IT Support</span><span class="num text-white/40">85%</span></div>
+            <div class="h-[3px] w-full bg-white/10"><div class="skill-bar h-full bg-white/50 skill-bar-fill" style="width:85%"></div></div>
+          </li>
+          <li>
+            <div class="flex justify-between text-sm mb-2"><span class="text-white/70">Database Management</span><span class="num text-white/40">80%</span></div>
+            <div class="h-[3px] w-full bg-white/10"><div class="skill-bar h-full bg-white/50 skill-bar-fill" style="width:80%"></div></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section id="experience" class="bg-paper text-ink py-24 border-t rule-light">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="mb-16 max-w-xl">
+      <p class="text-emerald-500 text-sm mb-2">Experience</p>
+      <h2 class="font-serif text-3xl md:text-4xl">Where I've worked.</h2>
+    </div>
+
+    <div class="relative">
+      <div class="absolute left-[7px] md:left-1/2 top-0 bottom-0 w-px bg-ink/15 md:-translate-x-1/2"></div>
+
+      <div class="space-y-14">
+
+        <!-- Item 1 -->
+        <div class="reveal relative md:grid md:grid-cols-2 md:gap-x-12">
+          <div class="hidden md:block"></div>
+          <div class="relative pl-8 md:pl-12">
+            <span class="timeline-dot absolute left-0 md:-left-[5px] top-1.5 h-3 w-3 rounded-full bg-emerald-500"></span>
+            <p class="num text-xs text-ink/40 mb-1">August 2026 — Present</p>
+            <h3 class="font-serif text-xl mb-1">Accountant</h3>
+            <p class="text-indigo-600 text-sm mb-3">Automan International Limited</p>
+            <p class="text-ink/70 leading-relaxed">
+              Manage day-to-day financial transactions, general ledger maintenance, and
+              financial reporting. Ensure compliance with statutory financial requirements.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="reveal relative md:grid md:grid-cols-2 md:gap-x-12">
+          <div class="relative pl-8 md:pl-0 md:pr-12 md:text-right md:col-start-1">
+            <span class="timeline-dot absolute left-0 md:left-auto md:-right-[5px] top-1.5 h-3 w-3 rounded-full bg-indigo-600"></span>
+            <p class="num text-xs text-ink/40 mb-1">April 2026 — May 2026</p>
+            <h3 class="font-serif text-xl mb-1">IEBC Voter Mobilizer</h3>
+            <p class="text-indigo-600 text-sm mb-3">Moyale Constituency</p>
+            <p class="text-ink/70 leading-relaxed">
+              Facilitated field outreach and voter mobilization during the Enhanced
+              Continuous Voter Registration phase. Compiled weekly mobilization activity reports.
+            </p>
+          </div>
+          <div class="hidden md:block"></div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="reveal relative md:grid md:grid-cols-2 md:gap-x-12">
+          <div class="hidden md:block"></div>
+          <div class="relative pl-8 md:pl-12">
+            <span class="timeline-dot absolute left-0 md:-left-[5px] top-1.5 h-3 w-3 rounded-full bg-emerald-500"></span>
+            <p class="num text-xs text-ink/40 mb-1">January 2025 — June 2025</p>
+            <h3 class="font-serif text-xl mb-1">Finance Department Intern</h3>
+            <p class="text-indigo-600 text-sm mb-3">Marsabit County Treasury</p>
+            <p class="text-ink/70 leading-relaxed">
+              Assisted in financial recordkeeping, budgetary allocations, and expenditure
+              tracking. Generated financial performance reports.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="reveal relative md:grid md:grid-cols-2 md:gap-x-12">
+          <div class="relative pl-8 md:pl-0 md:pr-12 md:text-right md:col-start-1">
+            <span class="timeline-dot absolute left-0 md:left-auto md:-right-[5px] top-1.5 h-3 w-3 rounded-full bg-indigo-600"></span>
+            <p class="num text-xs text-ink/40 mb-1">1 year</p>
+            <h3 class="font-serif text-xl mb-1">IT Support Technician</h3>
+            <p class="text-indigo-600 text-sm mb-3">Frontier Fiber Link</p>
+            <p class="text-ink/70 leading-relaxed">
+              Provided technical support for internet service infrastructure,
+              troubleshooting network connectivity and hardware issues.
+            </p>
+          </div>
+          <div class="hidden md:block"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects" class="bg-ink py-24 border-t rule">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="mb-14 max-w-xl">
+      <p class="text-emerald-400 text-sm mb-2">Projects</p>
+      <h2 class="font-serif text-3xl md:text-4xl">Selected work.</h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <article class="card-tick reveal bg-white/[0.03] border border-white/10 p-8 rounded-sm overflow-hidden">
+        <p class="num text-xs text-white/40 mb-4">August 2026</p>
+        <h3 class="font-serif text-2xl mb-3 text-white">Generation Ghana Data Analysis Capstone</h3>
+        <p class="text-white/60 leading-relaxed mb-6">
+          Completed a comprehensive data analytics program capstone, applying data
+          cleaning, exploratory data analysis, and dashboard visualization techniques
+          to solve real-world business scenarios.
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs px-2.5 py-1 border border-white/15 rounded-sm text-white/60">Python</span>
+          <span class="text-xs px-2.5 py-1 border border-white/15 rounded-sm text-white/60">EDA</span>
+          <span class="text-xs px-2.5 py-1 border border-white/15 rounded-sm text-white/60">Power BI</span>
+        </div>
+      </article>
+
+      <article class="card-tick reveal bg-white/[0.03] border border-white/10 p-8 rounded-sm overflow-hidden">
+        <p class="num text-xs text-white/40 mb-4">July 2026</p>
+        <h3 class="font-serif text-2xl mb-3 text-white">MedLab Diagnostics: Biomedical Data Analysis</h3>
+        <p class="text-white/60 leading-relaxed mb-6">
+          Designed and executed SQL queries to extract and clean healthcare operations
+          data, then built interactive Power BI dashboards to track diagnostic metrics
+          and operational efficiency, as part of the Generation Ghana capstone.
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs px-2.5 py-1 border border-white/15 rounded-sm text-white/60">SQL</span>
+          <span class="text-xs px-2.5 py-1 border border-white/15 rounded-sm text-white/60">Power BI</span>
+          <span class="text-xs px-2.5 py-1 border border-white/15 rounded-sm text-white/60">Healthcare Data</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section id="education" class="bg-paper text-ink py-24 border-t rule-light">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-12 gap-12">
+    <div class="md:col-span-4">
+      <p class="text-emerald-500 text-sm mb-2">Education & Certifications</p>
+      <h2 class="font-serif text-3xl md:text-4xl leading-tight">Grounded in both business and analytics.</h2>
+    </div>
+
+    <div class="md:col-span-7 md:col-start-6 divide-y rule-light">
+      <div class="py-6 flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1">
+        <div>
+          <h3 class="font-medium text-lg">Bachelor of Business Information Technology</h3>
+          <p class="text-ink/60 text-sm">Mount Kenya University</p>
+        </div>
+      </div>
+
+      <div class="py-6 flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1">
+        <div>
+          <h3 class="font-medium text-lg">Data Analysis Program</h3>
+          <p class="text-ink/60 text-sm">Generation Ghana</p>
+        </div>
+        <p class="num text-sm text-ink/40 whitespace-nowrap">Jun 2026 — Aug 2026</p>
+      </div>
+
+      <div class="py-6 flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1">
+        <div>
+          <h3 class="font-medium text-lg">Certified Public Accountant (CPA), Foundation Level</h3>
+          <p class="text-ink/60 text-sm">Kasneb</p>
+        </div>
+        <p class="num text-sm text-emerald-600 whitespace-nowrap">Active studies</p>
+      </div>
+
+      <div class="py-6 flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1">
+        <div>
+          <h3 class="font-medium text-lg">Secondary Education</h3>
+          <p class="text-ink/60 text-sm">Nguviu Boys High School — Maintenance Captain</p>
+        </div>
+        <p class="num text-sm text-ink/40 whitespace-nowrap">2024 — 2025</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="bg-ink py-24 border-t rule">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-14 items-start">
+      <div>
+        <p class="text-emerald-400 text-sm mb-2">Contact</p>
+        <h2 class="font-serif text-3xl md:text-4xl mb-6 text-white">Let's talk numbers, or data — or both.</h2>
+        <p class="text-white/60 leading-relaxed mb-8 max-w-md">
+          I'm open to roles and projects in financial accounting and data analytics.
+          Based in Nairobi, working comfortably in English and Kiswahili. References
+          available upon request, in line with data protection practice.
+        </p>
+
+        <dl class="space-y-4">
+          <div class="flex items-center gap-3 text-white/70">
+            <svg class="h-4 w-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75A2.25 2.25 0 016 4.5h12a2.25 2.25 0 012.25 2.25v10.5A2.25 2.25 0 0118 19.5H6a2.25 2.25 0 01-2.25-2.25V6.75zm0 0l8.25 6 8.25-6" /></svg>
+            <span class="text-sm">Available via the form — email set up on request</span>
+          </div>
+          <div class="flex items-center gap-3 text-white/70">
+            <svg class="h-4 w-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+            <span class="text-sm">Nairobi, Kenya</span>
+          </div>
+          <div class="flex items-center gap-3 text-white/70">
+            <svg class="h-4 w-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" /></svg>
+            <span class="text-sm">English · Kiswahili</span>
+          </div>
+        </dl>
+      </div>
+
+      <form id="contact-form" class="bg-white/[0.03] border border-white/10 rounded-sm p-8 space-y-5">
+        <div>
+          <label for="name" class="block text-xs text-white/50 mb-2">Name</label>
+          <input id="name" name="name" type="text" required class="w-full bg-transparent border-b border-white/20 focus:border-emerald-400 outline-none py-2 text-white placeholder-white/30 transition-colors" placeholder="Your name" />
+        </div>
+        <div>
+          <label for="email" class="block text-xs text-white/50 mb-2">Email</label>
+          <input id="email" name="email" type="email" required class="w-full bg-transparent border-b border-white/20 focus:border-emerald-400 outline-none py-2 text-white placeholder-white/30 transition-colors" placeholder="you@example.com" />
+        </div>
+        <div>
+          <label for="message" class="block text-xs text-white/50 mb-2">Message</label>
+          <textarea id="message" name="message" rows="4" required class="w-full bg-transparent border-b border-white/20 focus:border-emerald-400 outline-none py-2 text-white placeholder-white/30 transition-colors resize-none" placeholder="What are you working on?"></textarea>
+        </div>
+        <button type="submit" class="w-full py-3 bg-emerald-500 text-ink font-medium rounded-sm hover:bg-emerald-400 transition-colors">
+          Send message
+        </button>
+        <p id="form-status" class="text-sm text-emerald-400 hidden">Thanks — your message is ready to send once email delivery is connected.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-ink border-t rule py-8">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-white/40 text-sm">
+    <p>© <span id="year"></span> Abdimanar Edin Guyo.</p>
+    <p>Data Analyst & Accountant · Nairobi, Kenya</p>
+  </div>
+</footer>
+
+<script>
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+  let menuOpen = false;
+
+  function setMenu(open) {
+    menuOpen = open;
+    menuBtn.setAttribute('aria-expanded', open);
+    if (open) {
+      mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+      mobileMenu.style.opacity = '1';
+      iconOpen.classList.add('hidden');
+      iconClose.classList.remove('hidden');
+    } else {
+      mobileMenu.style.maxHeight = '0px';
+      mobileMenu.style.opacity = '0';
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+    }
+  }
+  setMenu(false);
+
+  menuBtn.addEventListener('click', () => setMenu(!menuOpen));
+
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => setMenu(false));
+  });
+
+  // Header background on scroll
+  const header = document.getElementById('site-header');
+  function onScroll() {
+    if (window.scrollY > 20) {
+      header.classList.add('bg-ink/90', 'backdrop-blur-sm', 'border-white/10');
+    } else {
+      header.classList.remove('bg-ink/90', 'backdrop-blur-sm', 'border-white/10');
+    }
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Scroll reveal for timeline / project cards
+  const revealEls = document.querySelectorAll('.reveal');
+  const skillBars = document.querySelectorAll('.skill-bar-fill');
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        skillObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  skillBars.forEach(el => skillObserver.observe(el));
+
+  // Contact form (front-end only — no backend wired up)
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    status.classList.remove('hidden');
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
